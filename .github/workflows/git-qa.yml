@@ -1,0 +1,10 @@
+name: Git QA
+on:
+  pull_request:
+    branches: main
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check conventional commit compliance
+        uses: agenthunt/conventional-commit-checker-action@v2.0.0
