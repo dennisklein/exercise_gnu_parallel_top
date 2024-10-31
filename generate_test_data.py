@@ -15,7 +15,7 @@ parser.add_argument(
     default="0.5-5",
     help="Range for sleep times, formatted as lower-upper",
 )
-
+ 
 # Initialisieren der Grenzen und Argumente
 args = parser.parse_args()
 
