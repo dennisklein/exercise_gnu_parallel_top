@@ -3,7 +3,7 @@ import sys
 
 parser = argparse.ArgumentParser(
     prog="cat",
-    description="Reads and prints a log file line by line, or from stdin if no file is provided."
+    description="Reads and prints a log file line by line, or from stdin if no file is provided.",
 )
 
 parser.add_argument("logfile", nargs="?", help="Path to the log file")
@@ -14,9 +14,8 @@ if args.logfile:
     with open(args.logfile, "r", encoding="utf-16") as file:
         for line in file.readlines():
             print(line.replace("\x00", ""), end="")
-    
+
 else:
     # read aut of stdin
     for line in sys.stdin.read().splitlines():
         print(line)
-
