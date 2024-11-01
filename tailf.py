@@ -29,4 +29,4 @@ while True:
         print(line.replace("\x00", ""), end="")
 
     # Wait for 10 seconds
-    time.sleep(3)
+    time.sleep(10)
