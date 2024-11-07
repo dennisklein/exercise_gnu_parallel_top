@@ -7,9 +7,7 @@ parser = argparse.ArgumentParser(
     description="Generates n lines of sleep() statements within the specified rang",
 )
 
-parser.add_argument(
-    "-n", default=100, type=int, help="Number of lines to generate"
-)
+parser.add_argument("-n", default=100, type=int, help="Number of lines to generate")
 parser.add_argument(
     "-t",
     default="0.5-5",
@@ -22,6 +20,11 @@ args = parser.parse_args()
 lower_bound, upper_bound = map(float, args.t.split("-"))
 lines = args.n
 
-# Test erstellen
+
+false_probability = 0.1
+
 for i in range(lines):
-    print("sleep " + str(round(random.uniform(lower_bound, upper_bound), 2)))
+    if random.random() < false_probability:
+        print("false")
+    else:
+        print("sleep " + str(round(random.uniform(lower_bound, upper_bound), 2)))
