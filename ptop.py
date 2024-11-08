@@ -38,29 +38,29 @@ def parse(input_line: str) -> dict:
     return parsed
 
 
-def progress(lines, total_jops):
-    return (len(lines) / tj) * 100 if tj else 0
+def progress(currend_line, total_jops):
+    return (currend_line / total_jops) * 100 if total_jops else 0
 
 
-def ascii_progress_bar(percentage, bar_length=50):
-    filled_length = int(bar_length * percentage // 100)
-    bar = "█" * filled_length + "-" * (bar_length - filled_length)
-    return f"[{bar}] {percentage:.2f}%"
+def ascii_progress_bar(percentage, total_jops, bar_length=50):
+    if total_jops > 0:
+        filled_length = int(bar_length * percentage // 100)
+        bar = "█" * filled_length + "-" * (bar_length - filled_length)
+        return f"[{bar}] {percentage:.2f}%"
 
 
 try:
     with open(args.logfile, "r") as file:
-        lines = []
+        currend_line = 0
         hosts = {}
         file.readline()
 
         while True:
             new_lines = file.readlines()
-            if new_lines:
-                lines.extend(new_lines)
+            currend_line += len(new_lines)
 
             clear_console()
-            print(ascii_progress_bar(progress(lines, tj)))
+            print(ascii_progress_bar(progress(currend_line, tj), tj))
             print(
                 "--------------------------------------------------------------"
             )
@@ -116,7 +116,7 @@ try:
                 f"{'overall':12} {throughput_overall:.2f}                  {totel_overall:5}    {succsessful_overall:5}        {failed_overall:5}"
             )
 
-            if progress(lines, tj) == 100:
+            if progress(currend_line, tj) == 100:
                 break
 
             time.sleep(1)
