@@ -38,8 +38,8 @@ def parse(input_line: str) -> dict:
     return parsed
 
 
-def progress(lines, total_jops):
-    return (len(lines) / tj) * 100 if tj else 0
+def progress(lines, total_jobs):
+    return (len(lines) / total_jobs) * 100 if total_jobs else 0
 
 
 def ascii_progress_bar(percentage, bar_length=50):
@@ -60,7 +60,8 @@ try:
                 lines.extend(new_lines)
 
             clear_console()
-            print(ascii_progress_bar(progress(lines, tj)))
+            if tj > 0:
+                print(ascii_progress_bar(progress(lines, tj)))
             print(
                 "--------------------------------------------------------------"
             )
