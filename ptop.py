@@ -60,7 +60,9 @@ try:
                 lines.extend(new_lines)
 
             clear_console()
-            print(ascii_progress_bar(progress(lines, tj)))
+            if tj > 0:
+                print(ascii_progress_bar(progress(lines, tj)))
+
             print(
                 "--------------------------------------------------------------"
             )
